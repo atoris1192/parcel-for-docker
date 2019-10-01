@@ -42,6 +42,15 @@ function TodoList (props) {
   )
 }
 
+function Title(props) {
+  return(
+    <h1>
+      My todos
+      <button className="purge" onClick={ props.purge }>Purge</button>
+    </h1>
+  )
+}
+
 
 class App extends React.Component {
   private state: any;
@@ -53,6 +62,19 @@ class App extends React.Component {
     }
     this.checkItem = this.checkItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.purge = this.purge.bind(this);
+  }
+
+  purge() {
+    const todos = this.state.todos.slice();
+    const newTodos = todos.filter( todo => {
+      return !todo.isDone
+    })
+
+    this.setState({
+      todos: newTodos
+    })
+
   }
 
   deleteItem(props) {
@@ -81,7 +103,7 @@ class App extends React.Component {
   render() {
     return(
       <div className="container">
-        <h1>Todos</h1>
+        <Title todos={this.state.todos} purge={ this.purge }/>
         <TodoList
           todos={this.state.todos}
           checkItem={ this.checkItem }
