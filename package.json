@@ -1,9 +1,17 @@
 {
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "ssh://git@github.com/atoris1192/parcel-for-docker.git",
+  "license": "MIT",
   "devDependencies": {
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "sass": "^1.22.12",
+    "typescript": "^3.6.3"
   },
   "dependencies": {
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1"
+    "react": "^16.0.0",
+    "react-dom": "^16.10.1",
+    "styless": "^0.0.3"
   }
 }

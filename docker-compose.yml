@@ -8,5 +8,5 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
-    command: parcel --hmr-port 1235 --hmr-hostname localhost index.pug
+    command: parcel --hmr-port 1235 --hmr-hostname localhost src/index.pug
     # command: parcel index.pug
