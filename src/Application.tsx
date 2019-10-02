@@ -51,6 +51,21 @@ function Title(props) {
   )
 }
 
+function TodoForm(props) {
+
+  return(
+    <form onSubmit={ props.addTodo }>
+      <div>{ props.item }</div>
+      <input type="text" 
+        id = "inputText"
+        value={ props.itemj }
+        onChange={ props.updateItem }
+        />
+      <input type="submit" value="Add"/>
+    </form>
+  )
+}
+
 
 class App extends React.Component {
   private state: any;
@@ -59,10 +74,40 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todos,
+      item: '',
     }
     this.checkItem = this.checkItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.purge = this.purge.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+    this.addTodo = this.addTodo.bind(this);
+  }
+  updateItem(e) {
+    this.setState({
+      item: e.target.value
+    })    
+    
+  }
+  addTodo(e){
+    e.preventDefault();
+
+    if(this.state.item.trim() === '' ) return
+    const inputText: any = document.getElementById('inputText');
+
+    const item = {
+      id: new Date().getTime().toString(36),
+      title: this.state.item,
+      isDone: false,
+    }
+    const todos = this.state.todos.slice();
+    todos.push(item);
+
+    this.setState({
+      todos: todos,
+      item: '',
+    })
+    inputText.value = ''
+
   }
 
   purge() {
@@ -109,6 +154,11 @@ class App extends React.Component {
           checkItem={ this.checkItem }
           deleteItem={ this.deleteItem }
         />
+        <TodoForm
+          item={ this.state.item }
+          updateItem={ this.updateItem} 
+          addTodo={ this.addTodo }
+         />
       </div>
     )
   }
