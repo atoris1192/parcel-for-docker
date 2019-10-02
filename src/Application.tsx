@@ -145,6 +145,19 @@ class App extends React.Component {
       todos: todos
     })
   }
+
+componentDidMount() {
+  const todos = JSON.parse(localStorage.getItem('todos'))
+
+  this.setState({
+    todos: todos || []
+  })
+}
+
+componentDidUpdate() {
+  const todos = this.state.todos
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
   render() {
     return(
       <div className="container">
